@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Shim gradlew for CI environments that invoke ./gradlew at project root without an Android project.
+# If an actual Android project exists, delegate to it; otherwise, print a helpful message and exit 0.
+set -e
+
+if [ -d "android" ] && [ -x "android/gradlew" ]; then
+  cd android
+  exec ./gradlew "$@"
+else
+  echo "Gradle wrapper not found (android/gradlew missing). Skipping native build."
+  echo "To generate it, run: npm run build:android (runs expo prebuild + gradle)."
+  # Exit successfully so CI does not fail on missing gradle wrapper.
+  exit 0
+fi

@@ -1,0 +1,12 @@
+/*
+ This file exists to safeguard CI environments that attempt to invoke Gradle at the project root
+ even when this Expo app has not been prebuilt yet. Without an /android directory, running Gradle
+ will fail with "No such file or directory: ./gradlew".
+
+ If you intend to build the native Android project:
+  1. Run: npm run build:android (this runs `expo prebuild --platform android` and then Gradle)
+  2. After prebuild, the /android directory will be created and the Gradle wrapper will be available.
+
+ CI note: It is safe to ignore Gradle at this level unless an Android artifact is explicitly required.
+*/
+rootProject.name = "notes_frontend"
